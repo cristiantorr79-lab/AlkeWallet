@@ -32,6 +32,7 @@ JUnit 5 – Pruebas unitarias
 Visual Studio Code – Entorno de desarrollo
 
 📁 Estructura del Proyecto
+
 AlkeWallet/
 ├── app/
 │   ├── src/
