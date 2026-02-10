@@ -13,6 +13,10 @@ public class Wallet {
 
     }
 
+    public Moneda getMoneda() {
+        return cuenta.getMoneda();
+    }
+
     public double getSaldo() {
         return cuenta.getSaldo();
     }
@@ -26,7 +30,7 @@ public class Wallet {
     }
 
     public double convertirSaldo(String monedaDestino) {
-        return convertidor.convertir(cuenta.getSaldo(), "CLP", monedaDestino);
+        return convertidor.convertir(cuenta.getSaldo(), cuenta.getMoneda().getCodigo(), monedaDestino);
     }
 
 }

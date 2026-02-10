@@ -9,12 +9,23 @@ public class ConvertidorMonedaSimple implements ConvertidorMoneda {
         }
         // Implementación simple de conversión de moneda
         if (monedaOrigen.equalsIgnoreCase("CLP") && monedaDestino.equalsIgnoreCase("USD")) {
-            return monto / 900; // Ejemplo de tasa de cambio
+            return monto / 850; // Ejemplo de tasa de cambio
         } else if (monedaOrigen.equalsIgnoreCase("USD") && monedaDestino.equalsIgnoreCase("CLP")) {
+            return monto * 850; // Ejemplo de tasa de cambio
+        }
+        if (monedaOrigen.equalsIgnoreCase("CLP") && monedaDestino.equalsIgnoreCase("EUR")) {
+            return monto / 900; // Ejemplo de tasa de cambio
+        } else if (monedaOrigen.equalsIgnoreCase("EUR") && monedaDestino.equalsIgnoreCase("CLP")) {
             return monto * 900; // Ejemplo de tasa de cambio
         }
-        // Si no se reconoce la combinación de monedas, devolver el monto sin convertir
-        return monto;
-    }
 
+        if (monedaOrigen.equalsIgnoreCase("USD") && monedaDestino.equalsIgnoreCase("EUR")) {
+            return monto / 1.1; // Ejemplo de tasa de cambio
+
+        } else if (monedaOrigen.equalsIgnoreCase("EUR") && monedaDestino.equalsIgnoreCase("USD")) {
+            return monto * 1.1; // Ejemplo de tasa de cambio
+        }
+        return monto; // Si no se reconoce la combinación de monedas, devolver el monto sin convertir  
+
+    }
 }
