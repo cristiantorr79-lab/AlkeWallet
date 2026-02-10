@@ -31,32 +31,33 @@ JUnit 5 – Pruebas unitarias
 
 Visual Studio Code – Entorno de desarrollo
 
-📁 Estructura del Proyecto
+## Estructura del Proyecto
 
-AlkeWallet/
-├── app/
-│   ├── src/
-│   │   ├── main/
-│   │   │   └── java/
-│   │   │       └── alkewallet/
-│   │   │           ├── WalletApp.java        # Clase principal (menú)
-│   │   │           ├── model/
-│   │   │           │   ├── Cuenta.java       # Lógica de cuenta
-│   │   │           │   ├── Wallet.java       # Coordinador de operaciones
-│   │   │           │   └── Moneda.java       # Enum de monedas
-│   │   │           └── convertidor/
-│   │   │               ├── ConvertidorMoneda.java
-│   │   │               └── ConvertidorMonedaSimple.java
-│   │   └── test/
-│   │       └── java/
-│   │           └── alkewallet/
-│   │               └── model/
-│   │                   └── CuentaTest.java  # Pruebas unitarias
-│   └── build.gradle
-├── gradlew
-├── gradlew.bat
-├── DIAGRAMA.md
-└── README.md
+    AlkeWallet/
+    ├── app/
+    │   ├── src/
+    │   │   ├── main/
+    │   │   │   └── java/
+    │   │   │       └── alkewallet/
+    │   │   │           ├── WalletApp.java        # Clase principal (menú)
+    │   │   │           ├── model/
+    │   │   │           │   ├── Cuenta.java       # Lógica de cuenta
+    │   │   │           │   ├── Wallet.java       # Coordinador de operaciones
+    │   │   │           │   └── Moneda.java       # Enum de monedas
+    │   │   │           └── convertidor/
+    │   │   │               ├── ConvertidorMoneda.java
+    │   │   │               └── ConvertidorMonedaSimple.java
+    │   │   └── test/
+    │   │       └── java/
+    │   │           └── alkewallet/
+    │   │               └── model/
+    │   │                   └── CuentaTest.java  # Pruebas unitarias
+    │   └── build.gradle
+    ├── gradlew
+    ├── gradlew.bat
+    ├── DIAGRAMA.md
+    └── README.md
+
 
 
 🚀 Instalación y Configuración
