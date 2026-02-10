@@ -1,8 +1,8 @@
-💰 AlkeWallet – Billetera Digital (Java · VS Code · Gradle)
+💰 ALKE WALLET – BILLETERA DIGITAL (Java · VS Code · Gradle)
 
 Java · JUnit 5 · Gradle · Visual Studio Code
 
-📋 Descripción
+📋 DESCRIPCION
 
 AlkeWallet es una aplicación de billetera digital desarrollada en Java que permite a los usuarios crear una cuenta, gestionar su saldo, realizar depósitos y retiros, y convertir dinero entre distintas monedas.
 
@@ -10,18 +10,28 @@ El proyecto aplica principios de Programación Orientada a Objetos (POO), uso de
 
 Diseñado para ejecutarse en consola y desarrollado en Visual Studio Code.
 
-🎯 Características Principales
+🎯 CARACTERISTICAS PRINCIPALES
+
 
 ✅ Crear cuenta con saldo inicial y moneda
+
 💰 Consultar saldo disponible
+
 📥 Depositar dinero (solo montos válidos)
+
 📤 Retirar dinero con validación de fondos
+
 💱 Convertir saldo entre monedas (CLP, USD, EUR)
+
 🔒 Validaciones para evitar operaciones inválidas
+
 🧪 Pruebas unitarias con JUnit 5
+
 🖥️ Menú interactivo por consola
 
-🛠️ Tecnologías Utilizadas
+
+🛠️ TECNOLOGIAS UTILIZADAS
+
 
 Java 21 – Lenguaje principal
 
@@ -31,35 +41,37 @@ JUnit 5 – Pruebas unitarias
 
 Visual Studio Code – Entorno de desarrollo
 
-📁 Estructura del Proyecto
+📁 ESTRUCTURA DEL PROYECTO
 
-AlkeWallet/
-├── app/
-│   ├── src/
-│   │   ├── main/
-│   │   │   └── java/
-│   │   │       └── alkewallet/
-│   │   │           ├── WalletApp.java        # Clase principal (menú)
-│   │   │           ├── model/
-│   │   │           │   ├── Cuenta.java       # Lógica de cuenta
-│   │   │           │   ├── Wallet.java       # Coordinador de operaciones
-│   │   │           │   └── Moneda.java       # Enum de monedas
-│   │   │           └── convertidor/
-│   │   │               ├── ConvertidorMoneda.java
-│   │   │               └── ConvertidorMonedaSimple.java
-│   │   └── test/
-│   │       └── java/
-│   │           └── alkewallet/
-│   │               └── model/
-│   │                   └── CuentaTest.java  # Pruebas unitarias
-│   └── build.gradle
-├── gradlew
-├── gradlew.bat
-├── DIAGRAMA.md
-└── README.md
+    AlkeWallet/
+    ├── app/
+    │   ├── src/
+    │   │   ├── main/
+    │   │   │   └── java/
+    │   │   │       └── alkewallet/
+    │   │   │           ├── WalletApp.java        # Clase principal (menú)
+    │   │   │           ├── model/
+    │   │   │           │   ├── Cuenta.java       # Lógica de cuenta
+    │   │   │           │   ├── Wallet.java       # Coordinador de operaciones
+    │   │   │           │   └── Moneda.java       # Enum de monedas
+    │   │   │           └── convertidor/
+    │   │   │               ├── ConvertidorMoneda.java
+    │   │   │               └── ConvertidorMonedaSimple.java
+    │   │   └── test/
+    │   │       └── java/
+    │   │           └── alkewallet/
+    │   │               └── model/
+    │   │                   └── CuentaTest.java  # Pruebas unitarias
+    │   └── build.gradle
+    ├── gradlew
+    ├── gradlew.bat
+    ├── DIAGRAMA.md
+    └── README.md
 
 
-🚀 Instalación y Configuración
+
+🚀 INSTALACION Y CONFIGURACION
+
 Prerrequisitos
 
 Java JDK 21 o superior
@@ -69,9 +81,12 @@ Visual Studio Code
 Gradle Wrapper (incluido en el proyecto)
 
 Verificar Java
+
 java -version
 
-▶️ Cómo Ejecutar la Aplicación
+▶️ COMO EJECUTAR LA APLICACION
+
+
 Opción 1: Desde VS Code (Recomendado)
 
 Abrir el proyecto en Visual Studio Code
@@ -83,38 +98,48 @@ Ejecutar el método main
 La aplicación se ejecutará en la terminal integrada
 
 Opción 2: Desde Terminal
+
 ./gradlew run
 
 
 (o ejecutar directamente el main desde VS Code)
 
-🧪 Ejecutar Pruebas Unitarias
+🧪 EJECUTAR PRUEBAS UNITARIAS
 
 Las pruebas están implementadas con JUnit 5 y validan la lógica de negocio de la clase Cuenta.
 
 Desde Terminal
+
 ./gradlew test
 
 Ejecutar solo pruebas de Cuenta
+
 ./gradlew test --tests alkewallet.model.CuentaTest
 
 Resultado esperado
+
 BUILD SUCCESSFUL
 
-🧪 Casos de Prueba Implementados
+🧪 CASOS DE PRUEBA IMPLEMENTADOS
 
 Clase CuentaTest:
 
 ✅ Asignación correcta del saldo inicial
+
 ✅ Depósitos válidos
+
 ✅ Rechazo de depósitos negativos
+
 ✅ Retiros válidos
+
 ✅ Rechazo de retiros mayores al saldo
+
 ✅ Rechazo de retiros negativos
 
 Las pruebas garantizan que las reglas de negocio financieras se cumplan correctamente.
 
-📖 Uso de la Aplicación
+📖 USO DE LA APLICACION
+
 Menú Principal (Consola)
 MENÚ PRINCIPAL
 1. Crear Cuenta
@@ -134,11 +159,16 @@ Consultar saldo
 
 Convertir saldo a otra moneda
 
-🏗️ Arquitectura del Proyecto
-Diagrama Conceptual Simplificado
+🏗️ ARQUITECTURA DEL PROYECTO
+
+DIAGRAMA CONCEPTUAL SIMPLIFICADO
+
 Wallet
+
  ├── Cuenta
+ 
  └── ConvertidorMoneda (interface)
+ 
         └── ConvertidorMonedaSimple
 
 Componentes
@@ -153,20 +183,25 @@ ConvertidorMoneda: contrato de conversión
 
 WalletApp: menú y flujo de la aplicación
 
-🎓 Requerimientos Académicos Cumplidos
+🎓 REQUERIMIENTOS ACADEMICOS CUMPLIDOS
 
 ✅ Programación Orientada a Objetos
+
 ✅ Uso de clases, encapsulación e interfaces
+
 ✅ Diagrama de clases
+
 ✅ Pruebas unitarias con JUnit 5
+
 ✅ Validación de reglas de negocio
+
 ✅ Aplicación funcional por consola
 
-👤 Autor
+👤 AUTOR
 
 Proyecto desarrollado por Cristian Torres
 como parte de su formación en desarrollo de software.
 
-📄 Licencia
+📄 LICENCIA
 
 Proyecto de uso educativo.
