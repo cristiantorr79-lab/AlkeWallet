@@ -1,8 +1,8 @@
-💰 AlkeWallet – Billetera Digital (Java · VS Code · Gradle)
+💰 ALKE WALLET – BILLETERA DIGITAL (Java · VS Code · Gradle)
 
 Java · JUnit 5 · Gradle · Visual Studio Code
 
-📋 Descripción
+📋 DESCRIPCION
 
 AlkeWallet es una aplicación de billetera digital desarrollada en Java que permite a los usuarios crear una cuenta, gestionar su saldo, realizar depósitos y retiros, y convertir dinero entre distintas monedas.
 
@@ -10,7 +10,7 @@ El proyecto aplica principios de Programación Orientada a Objetos (POO), uso de
 
 Diseñado para ejecutarse en consola y desarrollado en Visual Studio Code.
 
-🎯 Características Principales
+🎯 CARACTERISTICAS PRINCIPALES
 
 
 ✅ Crear cuenta con saldo inicial y moneda
@@ -30,7 +30,8 @@ Diseñado para ejecutarse en consola y desarrollado en Visual Studio Code.
 🖥️ Menú interactivo por consola
 
 
-🛠️ Tecnologías Utilizadas
+🛠️ TECNOLOGIAS UTILIZADAS
+
 
 Java 21 – Lenguaje principal
 
@@ -40,7 +41,7 @@ JUnit 5 – Pruebas unitarias
 
 Visual Studio Code – Entorno de desarrollo
 
-## Estructura del Proyecto
+📁 ESTRUCTURA DEL PROYECTO
 
     AlkeWallet/
     ├── app/
@@ -69,7 +70,7 @@ Visual Studio Code – Entorno de desarrollo
 
 
 
-🚀 Instalación y Configuración
+🚀 INSTALACION Y CONFIGURACION
 
 Prerrequisitos
 
@@ -83,7 +84,8 @@ Verificar Java
 
 java -version
 
-▶️ Cómo Ejecutar la Aplicación
+▶️ COMO EJECUTAR LA APLICACION
+
 
 Opción 1: Desde VS Code (Recomendado)
 
@@ -102,7 +104,7 @@ Opción 2: Desde Terminal
 
 (o ejecutar directamente el main desde VS Code)
 
-🧪 Ejecutar Pruebas Unitarias
+🧪 EJECUTAR PRUEBAS UNITARIAS
 
 Las pruebas están implementadas con JUnit 5 y validan la lógica de negocio de la clase Cuenta.
 
@@ -118,7 +120,7 @@ Resultado esperado
 
 BUILD SUCCESSFUL
 
-🧪 Casos de Prueba Implementados
+🧪 CASOS DE PRUEBA IMPLEMENTADOS
 
 Clase CuentaTest:
 
@@ -136,7 +138,8 @@ Clase CuentaTest:
 
 Las pruebas garantizan que las reglas de negocio financieras se cumplan correctamente.
 
-📖 Uso de la Aplicación
+📖 USO DE LA APLICACION
+
 Menú Principal (Consola)
 MENÚ PRINCIPAL
 1. Crear Cuenta
@@ -156,9 +159,9 @@ Consultar saldo
 
 Convertir saldo a otra moneda
 
- Arquitectura del Proyecto
+🏗️ ARQUITECTURA DEL PROYECTO
 
-Diagrama Conceptual Simplificado
+DIAGRAMA CONCEPTUAL SIMPLIFICADO
 
 Wallet
 
@@ -180,7 +183,7 @@ ConvertidorMoneda: contrato de conversión
 
 WalletApp: menú y flujo de la aplicación
 
-🎓 Requerimientos Académicos Cumplidos
+🎓 REQUERIMIENTOS ACADEMICOS CUMPLIDOS
 
 ✅ Programación Orientada a Objetos
 
@@ -194,11 +197,11 @@ WalletApp: menú y flujo de la aplicación
 
 ✅ Aplicación funcional por consola
 
-👤 Autor
+👤 AUTOR
 
 Proyecto desarrollado por Cristian Torres
 como parte de su formación en desarrollo de software.
 
-📄 Licencia
+📄 LICENCIA
 
 Proyecto de uso educativo.
