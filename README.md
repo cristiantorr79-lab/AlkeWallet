@@ -12,14 +12,23 @@ Diseñado para ejecutarse en consola y desarrollado en Visual Studio Code.
 
 🎯 Características Principales
 
+
 ✅ Crear cuenta con saldo inicial y moneda
+
 💰 Consultar saldo disponible
+
 📥 Depositar dinero (solo montos válidos)
+
 📤 Retirar dinero con validación de fondos
+
 💱 Convertir saldo entre monedas (CLP, USD, EUR)
+
 🔒 Validaciones para evitar operaciones inválidas
+
 🧪 Pruebas unitarias con JUnit 5
+
 🖥️ Menú interactivo por consola
+
 
 🛠️ Tecnologías Utilizadas
 
@@ -61,6 +70,7 @@ Visual Studio Code – Entorno de desarrollo
 
 
 🚀 Instalación y Configuración
+
 Prerrequisitos
 
 Java JDK 21 o superior
@@ -70,9 +80,11 @@ Visual Studio Code
 Gradle Wrapper (incluido en el proyecto)
 
 Verificar Java
+
 java -version
 
 ▶️ Cómo Ejecutar la Aplicación
+
 Opción 1: Desde VS Code (Recomendado)
 
 Abrir el proyecto en Visual Studio Code
@@ -84,6 +96,7 @@ Ejecutar el método main
 La aplicación se ejecutará en la terminal integrada
 
 Opción 2: Desde Terminal
+
 ./gradlew run
 
 
@@ -94,12 +107,15 @@ Opción 2: Desde Terminal
 Las pruebas están implementadas con JUnit 5 y validan la lógica de negocio de la clase Cuenta.
 
 Desde Terminal
+
 ./gradlew test
 
 Ejecutar solo pruebas de Cuenta
+
 ./gradlew test --tests alkewallet.model.CuentaTest
 
 Resultado esperado
+
 BUILD SUCCESSFUL
 
 🧪 Casos de Prueba Implementados
@@ -107,10 +123,15 @@ BUILD SUCCESSFUL
 Clase CuentaTest:
 
 ✅ Asignación correcta del saldo inicial
+
 ✅ Depósitos válidos
+
 ✅ Rechazo de depósitos negativos
+
 ✅ Retiros válidos
+
 ✅ Rechazo de retiros mayores al saldo
+
 ✅ Rechazo de retiros negativos
 
 Las pruebas garantizan que las reglas de negocio financieras se cumplan correctamente.
@@ -135,11 +156,16 @@ Consultar saldo
 
 Convertir saldo a otra moneda
 
-🏗️ Arquitectura del Proyecto
+ Arquitectura del Proyecto
+
 Diagrama Conceptual Simplificado
+
 Wallet
+
  ├── Cuenta
+ 
  └── ConvertidorMoneda (interface)
+ 
         └── ConvertidorMonedaSimple
 
 Componentes
@@ -157,10 +183,15 @@ WalletApp: menú y flujo de la aplicación
 🎓 Requerimientos Académicos Cumplidos
 
 ✅ Programación Orientada a Objetos
+
 ✅ Uso de clases, encapsulación e interfaces
+
 ✅ Diagrama de clases
+
 ✅ Pruebas unitarias con JUnit 5
+
 ✅ Validación de reglas de negocio
+
 ✅ Aplicación funcional por consola
 
 👤 Autor
