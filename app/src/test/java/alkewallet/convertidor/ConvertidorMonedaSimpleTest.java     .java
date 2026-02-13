@@ -30,7 +30,7 @@ public class CnvertidorMonedaSimpleTest {
 
     @Test
     void convertirUSDaCLP() {
-        
+
         // Arrange
         double monto = 100; // 100 USD
         // Act
