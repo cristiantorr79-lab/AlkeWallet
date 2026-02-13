@@ -1,13 +1,14 @@
 package alkewallet.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import org.junit.jupiter.api.Test;
 
 public class CuentaTest {
 
     @Test
     void saldoInicialSeAsignaCorrectamente() {
-
         // Arrange (preparar el escenario)
         String titular = "Cristian";
         double saldoInicial = 100000;
@@ -21,7 +22,6 @@ public class CuentaTest {
 
     @Test
     void depositarAumentaElSaldo() {
-
         // Arrange
         String titular = "Cristian";
         double saldoInicial = 100000;
@@ -31,17 +31,15 @@ public class CuentaTest {
 
         // Act
         double montoDeposito = 50000;
-        cuenta.depositar(50000);
+        cuenta.depositar(montoDeposito);
 
         // Assert
         double saldoEsperado = saldoInicial + montoDeposito;
-        assertEquals(150000, cuenta.getSaldo());
-
+        assertEquals(saldoEsperado, cuenta.getSaldo());
     }
 
     @Test
     void noPermiteDepositarMontoNegativo() {
-
         // Arrange
         String titular = "Cristian";
         double saldoInicial = 100000;
@@ -59,7 +57,6 @@ public class CuentaTest {
 
     @Test
     void retirarDisminuyeElSaldo() {
-
         // Arrange
         String titular = "Cristian";
         double saldoInicial = 100000;
@@ -73,13 +70,12 @@ public class CuentaTest {
 
         // Assert
         double saldoEsperado = saldoInicial - montoRetiro;
-        assertEquals(50000, cuenta.getSaldo());
-        assertEquals(true, resultadoRetiro);
+        assertEquals(saldoEsperado, cuenta.getSaldo());
+        assertTrue(resultadoRetiro);
     }
 
     @Test
     void noPermiteRetirarMasQueElSaldo() {
-
         // Arrange
         String titular = "Cristian";
         double saldoInicial = 100000;
@@ -93,12 +89,11 @@ public class CuentaTest {
 
         // Assert
         assertEquals(saldoInicial, cuenta.getSaldo());
-        assertEquals(false, resultadoRetiro);
+        assertFalse(resultadoRetiro);
     }
 
     @Test
     void noPermiteRetirarMontoNegativo() {
-
         // Arrange
         String titular = "Cristian";
         double saldoInicial = 100000;
@@ -112,7 +107,6 @@ public class CuentaTest {
 
         // Assert
         assertEquals(saldoInicial, cuenta.getSaldo());
-        assertEquals(false, resultadoRetiro);
+        assertFalse(resultadoRetiro);
     }
-
 }

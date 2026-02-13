@@ -42,4 +42,11 @@ public class Cuenta {
         }
         return false;
     }
+    // Agregar método toString() para debugging
+
+    @Override
+    public String toString() {
+        return String.format("Cuenta[titular='%s', saldo=%.2f %s]",
+                titular, saldo, moneda.getCodigo());
+    }
 }

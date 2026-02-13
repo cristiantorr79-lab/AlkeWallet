@@ -23,6 +23,44 @@ public class WalletApp {
         return true;
     }
 
+    private static Moneda seleccionarMoneda() {
+        Moneda monedaSeleccionada = null;
+
+        do {
+            System.out.println("Seleccione moneda:");
+            System.out.println("1: CLP");
+            System.out.println("2: USD");
+            System.out.println("3: EUR");
+            System.out.print("Opción: ");
+
+            if (!scanner.hasNextInt()) {
+                System.out.println("Por favor, ingrese un número válido.");
+                scanner.nextLine();
+                continue;
+            }
+
+            int opcion = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (opcion) {
+                case 1:
+                    monedaSeleccionada = Moneda.CLP;
+                    break;
+                case 2:
+                    monedaSeleccionada = Moneda.USD;
+                    break;
+                case 3:
+                    monedaSeleccionada = Moneda.EUR;
+                    break;
+                default:
+                    System.out.println("Opción inválida.");
+            }
+
+        } while (monedaSeleccionada == null);
+
+        return monedaSeleccionada;
+    }
+
     public static void main(String[] args) {
 
         int opcion = -1;
@@ -66,36 +104,7 @@ public class WalletApp {
 
                     } while (titular.isEmpty());
 
-                    Moneda monedaSeleccionada = null;
-
-                    do {
-                        System.out.println("Seleccione moneda:");
-                        System.out.println("1: CLP");
-                        System.out.println("2: USD");
-                        System.out.println("3: EUR");
-                        System.out.print("Opción: ");
-
-                        if (!scanner.hasNextInt()) {
-                            System.out.println("Por favor, ingrese un número válido.");
-                            scanner.nextLine();
-                            continue;
-                        }
-
-                        int m = scanner.nextInt();
-                        scanner.nextLine();
-
-                        switch (m) {
-                            case 1 ->
-                                monedaSeleccionada = Moneda.CLP;
-                            case 2 ->
-                                monedaSeleccionada = Moneda.USD;
-                            case 3 ->
-                                monedaSeleccionada = Moneda.EUR;
-                            default ->
-                                System.out.println("Opción inválida.");
-                        }
-
-                    } while (monedaSeleccionada == null);
+                    Moneda monedaSeleccionada = seleccionarMoneda();
 
                     System.out.print("Ingrese saldo inicial ("
                             + monedaSeleccionada.getSimbolo() + "): ");
@@ -170,45 +179,20 @@ public class WalletApp {
                     break;
 
                 case 5:
+
                     if (!validarCuentaCreada()) {
                         break;
                     }
 
                     System.out.println("Seleccione moneda destino:");
-                    System.out.println("1: CLP");
-                    System.out.println("2: USD");
-                    System.out.println("3: EUR");
-                    System.out.print("Opción: ");
+                    Moneda monedaDestino = seleccionarMoneda();
 
-                    if (!scanner.hasNextInt()) {
-                        System.out.println("Por favor, ingrese un número válido.");
-                        scanner.nextLine(); // Limpiar entrada no válida
-                        continue;
-                    }
-
-                    int m = scanner.nextInt();
-                    scanner.nextLine();
-
-                    String destino = null;
-
-                    switch (m) {
-                        case 1 ->
-                            destino = "CLP";
-                        case 2 ->
-                            destino = "USD";
-                        case 3 ->
-                            destino = "EUR";
-                        default ->
-                            System.out.println("Opción inválida.");
-                    }
-
-                    if (destino != null) {
-                        double convertido = wallet.convertirSaldo(destino);
-                        System.out.println("Saldo convertido: "
-                                + df.format(convertido) + " " + destino);
-                    }
+                    double convertido = wallet.convertirSaldo(monedaDestino.getCodigo());
+                    System.out.println("Saldo convertido: "
+                            + df.format(convertido) + " "
+                            + monedaDestino.getCodigo()
+                            + " (" + monedaDestino.getSimbolo() + ")");
                     break;
-
                 case 0:
                     System.out.println("Gracias por usar AlkeWallet.");
                     break;
