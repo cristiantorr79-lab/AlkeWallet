@@ -1,5 +1,5 @@
-## Diagrama de Clases (UML)
-
+## 📐 Diagrama de Clases (UML)
+```
 ┌──────────────────────────────────────┐
 │            WalletApp                 │
 │         <<main class>>               │
@@ -38,23 +38,23 @@
 │ - moneda : Moneda│  │     String) : double        │
 ├──────────────────┤  └──────────▲──────────────────┘
 │ + Cuenta(String, │             │ implementa
-│   double, Moneda)│             │ ┌───────┐
-│ + getTitular():  │             └─┤   △   │
-│   String         │               └───────┘
-│ + getSaldo() :   │                   │
-│   double         │  ┌────────────────┴─────────────┐
-│ + getMoneda() :  │  │ ConvertidorMonedaSimple      │
-│   Moneda         │  ├──────────────────────────────┤
-│ + depositar(     │  │ - CLP_TO_USD : double        │
-│   double) : void │  │ - USD_TO_CLP : double        │
-│ + retirar(double)│  │ - CLP_TO_EUR : double        │
-│   : boolean      │  │ - EUR_TO_CLP : double        │
-│ + toString() :   │  │ - USD_TO_EUR : double        │
-│   String         │  │ - EUR_TO_USD : double        │
-└────┬─────────────┘  ├──────────────────────────────┤
-     │ usa            │ + convertir(double, String,  │
-     │                │     String) : double         │
-     ▼                └──────────────────────────────┘
+│   double, Moneda)│             │
+│ + getTitular():  │             │
+│   String         │  ┌──────────┴─────────────────┐
+│ + getSaldo() :   │  │ ConvertidorMonedaSimple    │
+│   double         │  ├────────────────────────────┤
+│ + getMoneda() :  │  │ - CLP_TO_USD : double      │
+│   Moneda         │  │ - USD_TO_CLP : double      │
+│ + depositar(     │  │ - CLP_TO_EUR : double      │
+│   double) : void │  │ - EUR_TO_CLP : double      │
+│ + retirar(double)│  │ - USD_TO_EUR : double      │
+│   : boolean      │  │ - EUR_TO_USD : double      │
+│ + toString() :   │  ├────────────────────────────┤
+│   String         │  │ + convertir(double, String,│
+└────┬─────────────┘  │     String) : double       │
+     │ usa            └────────────────────────────┘
+     │
+     ▼
 ┌──────────────────┐
 │   <<enumeration>>│
 │      Moneda      │
@@ -72,15 +72,11 @@
 │   String         │
 └──────────────────┘
 
-
 LEYENDA:
-────────────────────────────────
-◆  = Composición (fuerte)
+──────────────────
+◆  = Composición
 △  = Herencia/Implementación
-───> = Asociación/Uso
+──> = Asociación/Uso
 <<interface>> = Interfaz
 <<enumeration>> = Enumeración
 ```
-
-
-
