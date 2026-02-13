@@ -1,207 +1,198 @@
-💰 ALKE WALLET – BILLETERA DIGITAL (Java · VS Code · Gradle)
+# 💰 AlkeWallet - Billetera Digital
+
+Proyecto de billetera digital desarrollado para el bootcamp de Alkemy, que permite a los usuarios gestionar sus activos financieros de manera segura y conveniente.
+
+## 📋 Descripción
+
+AlkeWallet es una aplicación de consola que permite:
+- Crear una cuenta de usuario
+- Consultar saldo disponible
+- Realizar depósitos
+- Realizar retiros
+- Convertir saldo entre diferentes monedas (CLP, USD, EUR)
+
+## 🎯 Objetivo
+
+Desarrollar una billetera digital funcional, segura y fácil de usar que proporcione a los usuarios una solución confiable para administrar sus activos financieros de manera digital.
+
+## 🛠️ Tecnologías Utilizadas
+
+- **Java 17** o superior
+- **JUnit 5** para pruebas unitarias
+- **Maven** (opcional, si lo usas)
+- Paradigma de **Programación Orientada a Objetos (POO)**
+
+## 📁 Estructura del Proyecto
+```
+AlkeWallet/
+├── src/
+│   └── alkewallet/
+│       ├── WalletApp.java                 # Clase principal con menú
+│       ├── model/
+│       │   ├── Cuenta.java                # Gestión de cuenta
+│       │   ├── Wallet.java                # Lógica de billetera
+│       │   └── Moneda.java                # Enum de monedas
+│       └── convertidor/
+│           ├── ConvertidorMoneda.java     # Interfaz
+│           └── ConvertidorMonedaSimple.java # Implementación
+├── test/
+│   └── alkewallet/
+│       ├── model/
+│       │   ├── CuentaTest.java
+│       │   └── WalletTest.java
+│       └── convertidor/
+│           └── ConvertidorMonedaSimpleTest.java
+└── README.md
+```
+
+## ⚙️ Requisitos Previos
+
+- **JDK 17** o superior instalado
+- **IDE** recomendado: IntelliJ IDEA, Eclipse, VS Code o NetBeans
+- (Opcional) Maven para gestión de dependencias
+
+## 🚀 Instalación y Ejecución
+
+### Opción 1: Desde el IDE
+
+1. **Clonar el repositorio:**
+```bash
+   git clone https://github.com/cristiantorr79-lab/AlkeWallet.git
+```
+
+2. **Abrir el proyecto en tu IDE:**
+   - IntelliJ IDEA: `File > Open > Seleccionar carpeta del proyecto`
+   - Eclipse: `File > Import > Existing Projects into Workspace`
+   - VS Code: `File > Open Folder`
+
+3. **Ejecutar la aplicación:**
+   - Buscar la clase `WalletApp.java`
+   - Click derecho > `Run 'WalletApp.main()'`
+
+### Opción 2: Desde la línea de comandos
+
+1. **Compilar:**
+```bash
+   cd AlkeWallet
+   javac -d bin src/alkewallet/*.java src/alkewallet/model/*.java src/alkewallet/convertidor/*.java
+```
+
+2. **Ejecutar:**
+```bash
+   java -cp bin alkewallet.WalletApp
+```
 
-Java · JUnit 5 · Gradle · Visual Studio Code
+## 🧪 Ejecutar Pruebas Unitarias
 
-📋 DESCRIPCION
+### Desde el IDE:
+1. Click derecho en la carpeta `test`
+2. Seleccionar `Run All Tests`
 
-AlkeWallet es una aplicación de billetera digital desarrollada en Java que permite a los usuarios crear una cuenta, gestionar su saldo, realizar depósitos y retiros, y convertir dinero entre distintas monedas.
+### Desde línea de comandos (con Maven):
+```bash
+mvn test
+```
 
-El proyecto aplica principios de Programación Orientada a Objetos (POO), uso de interfaces, validaciones de reglas de negocio y pruebas unitarias con JUnit 5.
+## 📖 Uso de la Aplicación
 
-Diseñado para ejecutarse en consola y desarrollado en Visual Studio Code.
+### Menú Principal
+```
+MENÚ PRINCIPAL:
+1: Crear Cuenta
+2: Ver Saldo
+3: Depositar
+4: Retirar
+5: Convertir saldo
+0: Salir
+```
 
-🎯 CARACTERISTICAS PRINCIPALES
+### Ejemplo de Uso
 
+1. **Crear una cuenta:**
+   - Selecciona opción `1`
+   - Ingresa tu nombre
+   - Selecciona moneda (CLP, USD o EUR)
+   - Define saldo inicial
 
-✅ Crear cuenta con saldo inicial y moneda
+2. **Depositar dinero:**
+   - Selecciona opción `3`
+   - Ingresa el monto a depositar
 
-💰 Consultar saldo disponible
+3. **Retirar dinero:**
+   - Selecciona opción `4`
+   - Ingresa el monto a retirar
 
-📥 Depositar dinero (solo montos válidos)
+4. **Convertir saldo:**
+   - Selecciona opción `5`
+   - Elige la moneda destino
+   - El sistema mostrará el equivalente (no cambia tu saldo)
 
-📤 Retirar dinero con validación de fondos
+## 💱 Tasas de Cambio
 
-💱 Convertir saldo entre monedas (CLP, USD, EUR)
+Las tasas de cambio utilizadas son:
 
-🔒 Validaciones para evitar operaciones inválidas
+| Conversión | Tasa |
+|------------|------|
+| CLP → USD | 850 CLP = 1 USD |
+| USD → CLP | 1 USD = 850 CLP |
+| CLP → EUR | 900 CLP = 1 EUR |
+| EUR → CLP | 1 EUR = 900 CLP |
+| USD → EUR | 1.1 USD = 1 EUR |
+| EUR → USD | 1 EUR = 1.1 USD |
 
-🧪 Pruebas unitarias con JUnit 5
+> **Nota:** Estas tasas son de ejemplo para propósitos educativos.
 
-🖥️ Menú interactivo por consola
+## 🏗️ Arquitectura y Diseño
 
+### Principios de POO Aplicados
 
-🛠️ TECNOLOGIAS UTILIZADAS
+- **Encapsulamiento:** Atributos privados con getters/setters
+- **Abstracción:** Uso de interfaces (`ConvertidorMoneda`)
+- **Composición:** `Wallet` compone `Cuenta` y `ConvertidorMoneda`
+- **Polimorfismo:** Implementación de la interfaz `ConvertidorMoneda`
 
+### Patrones de Diseño
 
-Java 21 – Lenguaje principal
+- **Strategy Pattern:** Para el convertidor de monedas
+- **Dependency Injection:** En el constructor de `Wallet`
 
-Gradle – Gestión de dependencias y build
+## 🧪 Pruebas Unitarias
 
-JUnit 5 – Pruebas unitarias
+El proyecto cuenta con **17 pruebas unitarias** que cubren:
 
-Visual Studio Code – Entorno de desarrollo
+### CuentaTest.java (6 tests)
+- ✅ Asignación de saldo inicial
+- ✅ Depósitos válidos e inválidos
+- ✅ Retiros exitosos, con fondos insuficientes y negativos
 
-📁 ESTRUCTURA DEL PROYECTO
+### WalletTest.java (8 tests)
+- ✅ Consulta de saldo y moneda
+- ✅ Operaciones de depósito y retiro
+- ✅ Conversiones de moneda (CLP↔USD, CLP↔EUR)
 
-    AlkeWallet/
-    ├── app/
-    │   ├── src/
-    │   │   ├── main/
-    │   │   │   └── java/
-    │   │   │       └── alkewallet/
-    │   │   │           ├── WalletApp.java        # Clase principal (menú)
-    │   │   │           ├── model/
-    │   │   │           │   ├── Cuenta.java       # Lógica de cuenta
-    │   │   │           │   ├── Wallet.java       # Coordinador de operaciones
-    │   │   │           │   └── Moneda.java       # Enum de monedas
-    │   │   │           └── convertidor/
-    │   │   │               ├── ConvertidorMoneda.java
-    │   │   │               └── ConvertidorMonedaSimple.java
-    │   │   └── test/
-    │   │       └── java/
-    │   │           └── alkewallet/
-    │   │               └── model/
-    │   │                   └── CuentaTest.java  # Pruebas unitarias
-    │   └── build.gradle
-    ├── gradlew
-    ├── gradlew.bat
-    ├── DIAGRAMA.md
-    └── README.md
+### ConvertidorMonedaSimpleTest.java (3 tests)
+- ✅ Conversiones entre todas las monedas soportadas
 
+## 👨‍💻 Autor
 
+**Cristian Torres**
+- GitHub: [@cristiantorr79-lab](https://github.com/cristiantorr79-lab)
+- Proyecto: Evaluación Módulo 2 - Bootcamp Alkemy
 
-🚀 INSTALACION Y CONFIGURACION
+## 📅 Fecha
 
-Prerrequisitos
+Febrero 2026
 
-Java JDK 21 o superior
+## 📄 Licencia
 
-Visual Studio Code
+Este proyecto fue desarrollado con fines educativos para el bootcamp de Desarrollo de Aplicaciones Moviles Android.
 
-Gradle Wrapper (incluido en el proyecto)
+## 🙏 Agradecimientos
 
-Verificar Java
+- Sence e Infocal por el bootcamp y la oportunidad de aprendizaje
+- Instructores y mentores del programa
+- Compañeros de bootcamp por el apoyo y colaboración
 
-java -version
+---
 
-▶️ COMO EJECUTAR LA APLICACION
-
-
-Opción 1: Desde VS Code (Recomendado)
-
-Abrir el proyecto en Visual Studio Code
-
-Abrir el archivo WalletApp.java
-
-Ejecutar el método main
-
-La aplicación se ejecutará en la terminal integrada
-
-Opción 2: Desde Terminal
-
-./gradlew run
-
-
-(o ejecutar directamente el main desde VS Code)
-
-🧪 EJECUTAR PRUEBAS UNITARIAS
-
-Las pruebas están implementadas con JUnit 5 y validan la lógica de negocio de la clase Cuenta.
-
-Desde Terminal
-
-./gradlew test
-
-Ejecutar solo pruebas de Cuenta
-
-./gradlew test --tests alkewallet.model.CuentaTest
-
-Resultado esperado
-
-BUILD SUCCESSFUL
-
-🧪 CASOS DE PRUEBA IMPLEMENTADOS
-
-Clase CuentaTest:
-
-✅ Asignación correcta del saldo inicial
-
-✅ Depósitos válidos
-
-✅ Rechazo de depósitos negativos
-
-✅ Retiros válidos
-
-✅ Rechazo de retiros mayores al saldo
-
-✅ Rechazo de retiros negativos
-
-Las pruebas garantizan que las reglas de negocio financieras se cumplan correctamente.
-
-📖 USO DE LA APLICACION
-
-Menú Principal (Consola)
-MENÚ PRINCIPAL
-1. Crear Cuenta
-2. Ver Saldo
-3. Depositar
-4. Retirar
-5. Convertir Saldo
-0. Salir
-
-Flujo típico
-
-Crear cuenta → ingresar nombre, moneda y saldo inicial
-
-Depositar dinero
-
-Consultar saldo
-
-Convertir saldo a otra moneda
-
-🏗️ ARQUITECTURA DEL PROYECTO
-
-DIAGRAMA CONCEPTUAL SIMPLIFICADO
-
-Wallet
-
- ├── Cuenta
- 
- └── ConvertidorMoneda (interface)
- 
-        └── ConvertidorMonedaSimple
-
-Componentes
-
-Cuenta: maneja saldo, depósitos y retiros
-
-Wallet: coordina operaciones de la cuenta
-
-Moneda: enum de monedas disponibles
-
-ConvertidorMoneda: contrato de conversión
-
-WalletApp: menú y flujo de la aplicación
-
-🎓 REQUERIMIENTOS ACADEMICOS CUMPLIDOS
-
-✅ Programación Orientada a Objetos
-
-✅ Uso de clases, encapsulación e interfaces
-
-✅ Diagrama de clases
-
-✅ Pruebas unitarias con JUnit 5
-
-✅ Validación de reglas de negocio
-
-✅ Aplicación funcional por consola
-
-👤 AUTOR
-
-Proyecto desarrollado por Cristian Torres
-como parte de su formación en desarrollo de software.
-
-📄 LICENCIA
-
-Proyecto de uso educativo.
+⭐ Si este proyecto te fue útil, no olvides darle una estrella en GitHub

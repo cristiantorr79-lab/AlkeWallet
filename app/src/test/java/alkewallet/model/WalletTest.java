@@ -67,4 +67,23 @@ public class WalletTest {
         assertFalse(resultado);
         assertEquals(100000, wallet.getSaldo());
     }
+
+    @Test
+    void convertirSaldoDeCLPaUSD() {
+        double saldoConvertido = wallet.convertirSaldo("USD");
+
+        // Assert
+        double saldoEsperado = 100000 / 850.0;
+        assertEquals(saldoEsperado, saldoConvertido, 0.01);
+    }
+
+    @Test
+    void convertirSaldoDeCLPaEUR() {
+        double saldoConvertido = wallet.convertirSaldo("EUR");
+
+        // Assert
+        double saldoEsperado = 100000 / 900.0;
+        assertEquals(saldoEsperado, saldoConvertido, 0.01);
+
+    }
 }
