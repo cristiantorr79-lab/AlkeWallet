@@ -30,13 +30,14 @@ public class CnvertidorMonedaSimpleTest {
 
     @Test
     void convertirUSDaCLP() {
+        
         // Arrange
-        double monto = 1000; // 1,000 USD
+        double monto = 100; // 100 USD
         // Act
         double resultado = convertidor.convertir(monto, "USD", "CLP");
 
         // Assert
-        double esperado = 850000.0; // 1,000 USD = 850,000 CLP
+        double esperado = 85000.0; // 100 USD = 85,000 CLP
         assertEquals(esperado, resultado, 0.01);
     }
 
