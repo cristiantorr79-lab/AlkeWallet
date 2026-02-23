@@ -1,27 +1,24 @@
 package alkewallet.model;
 
+import java.math.BigDecimal;
+
 public class Cuenta {
 
     private String titular;
-    private double saldo;
+    private BigDecimal saldo;
     private Moneda moneda;
 
-    public Cuenta(String titular, double saldoInicial, Moneda moneda) {
+    public Cuenta(String titular, BigDecimal saldo, Moneda moneda) {
         this.titular = titular;
+        this.saldo = saldo != null ? saldo : BigDecimal.ZERO;
         this.moneda = moneda;
-
-        if (saldoInicial > 0) {
-            this.saldo = saldoInicial;
-        } else {
-            this.saldo = 0;
-        }
     }
 
     public String getTitular() {
         return titular;
     }
 
-    public double getSaldo() {
+    public BigDecimal getSaldo() {
         return saldo;
     }
 
@@ -29,24 +26,24 @@ public class Cuenta {
         return moneda;
     }
 
-    public void depositar(double monto) {
-        if (monto > 0) {
-            saldo += monto;
-        }
+    public void recargar(BigDecimal monto) {
+        validarMonto(monto);
+        saldo = saldo.add(monto);
     }
 
-    public boolean retirar(double monto) {
-        if (monto > 0 && monto <= saldo) {
-            saldo -= monto;
-            return true;
-        }
-        return false;
-    }
-    // Agregar método toString() para debugging
+    public void descontar(BigDecimal monto) {
+        validarMonto(monto);
 
-    @Override
-    public String toString() {
-        return String.format("Cuenta[titular='%s', saldo=%.2f %s]",
-                titular, saldo, moneda.getCodigo());
+        if (saldo.compareTo(monto) < 0) {
+            throw new IllegalStateException("Saldo insuficiente.");
+        }
+
+        saldo = saldo.subtract(monto);
+    }
+
+    private void validarMonto(BigDecimal monto) {
+        if (monto == null || monto.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new IllegalArgumentException("El monto debe ser mayor que cero.");
+        }
     }
 }

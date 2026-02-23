@@ -23,6 +23,7 @@ dependencies {
 
     // This dependency is used by the application.
     implementation(libs.guava)
+    implementation("com.mysql:mysql-connector-j:8.3.0")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
@@ -34,10 +35,23 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = "alkewallet.App"
+     mainClass.set("alkewallet.WalletApp")
 }
 
 tasks.named<Test>("test") {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
+}
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = "alkewallet.WalletApp"
+    }
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    from({
+        configurations.runtimeClasspath.get().map {
+            if (it.isDirectory) it else zipTree(it)
+        }
+    })
 }

@@ -1,7 +1,11 @@
 package alkewallet.convertidor;
 
+import java.math.BigDecimal;
+
+import alkewallet.model.Moneda;
+
 public interface ConvertidorMoneda {
 
-    double convertir(double monto, String monedaOrigen, String monedaDestino);
-
+    BigDecimal convertir(BigDecimal monto, Moneda origen, Moneda destino);
+    
 }

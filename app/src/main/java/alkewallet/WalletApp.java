@@ -1,207 +1,226 @@
 package alkewallet;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.util.List;
 import java.util.Scanner;
 
-import alkewallet.convertidor.ConvertidorMoneda;
-import alkewallet.convertidor.ConvertidorMonedaSimple;
-import alkewallet.model.Cuenta;
+import alkewallet.exception.MontoInvalidoException;
+import alkewallet.exception.SaldoInsuficienteException;
+import alkewallet.exception.UsuarioNoExisteException;
 import alkewallet.model.Moneda;
-import alkewallet.model.Wallet;
+import alkewallet.model.Transaccion;
+import alkewallet.model.Usuario;
+import alkewallet.service.WalletService;
 
 public class WalletApp {
 
     private static final Scanner scanner = new Scanner(System.in);
-    private static Wallet wallet = null;
+    private static final WalletService walletService =
+            new WalletService(new UsuarioRepository());
+
     private static final DecimalFormat df = new DecimalFormat("#,##0.00");
-
-    private static boolean validarCuentaCreada() {
-        if (wallet == null) {
-            System.out.println("Primero debe crear una cuenta.");
-            return false;
-        }
-        return true;
-    }
-
-    private static Moneda seleccionarMoneda() {
-        Moneda monedaSeleccionada = null;
-
-        do {
-            System.out.println("Seleccione moneda:");
-            System.out.println("1: CLP");
-            System.out.println("2: USD");
-            System.out.println("3: EUR");
-            System.out.print("Opción: ");
-
-            if (!scanner.hasNextInt()) {
-                System.out.println("Por favor, ingrese un número válido.");
-                scanner.nextLine();
-                continue;
-            }
-
-            int opcion = scanner.nextInt();
-            scanner.nextLine();
-
-            switch (opcion) {
-                case 1:
-                    monedaSeleccionada = Moneda.CLP;
-                    break;
-                case 2:
-                    monedaSeleccionada = Moneda.USD;
-                    break;
-                case 3:
-                    monedaSeleccionada = Moneda.EUR;
-                    break;
-                default:
-                    System.out.println("Opción inválida.");
-            }
-
-        } while (monedaSeleccionada == null);
-
-        return monedaSeleccionada;
-    }
 
     public static void main(String[] args) {
 
+        System.out.println("=== ALKE WALLET PROFESIONAL ===");
+
+        Usuario usuario = null;
+
+        // LOGIN
+        while (usuario == null) {
+
+            try {
+                System.out.print("Ingrese su user_id: ");
+                int userId = Integer.parseInt(scanner.nextLine());
+
+                usuario = walletService.login(userId);
+
+                System.out.println("Usuario cargado correctamente.");
+                System.out.println("Bienvenido, " + usuario.getNombre() + ".");
+                System.out.println("Saldo actual: "
+                        + Moneda.CLP.getSimbolo() + " "
+                        + df.format(usuario.getSaldo()));
+
+            } catch (NumberFormatException e) {
+                System.out.println("Ingrese un número válido.");
+            } catch (UsuarioNoExisteException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
         int opcion = -1;
 
-        do {
+        while (opcion != 0) {
+
             System.out.println("\nMENÚ PRINCIPAL:");
-            System.out.println("1: Crear Cuenta");
-            System.out.println("2: Ver Saldo");
-            System.out.println("3: Depositar");
-            System.out.println("4: Retirar");
+            System.out.println("1: Ver Saldo");
+            System.out.println("2: Depositar");
+            System.out.println("3: Retirar");
+            System.out.println("4: Transferir");
             System.out.println("5: Convertir saldo");
+            System.out.println("6: Ver historial");
+            System.out.println("7: Exportar historial a CSV ");
             System.out.println("0: Salir");
-            System.out.print("Seleccione una opción: ");
+            System.out.print("Opción: ");
 
             try {
                 opcion = Integer.parseInt(scanner.nextLine());
-            } catch (NumberFormatException e) {
-                System.out.println("Por favor, ingrese un número válido.");
-                opcion = -1;
-            }
 
-            switch (opcion) {
+                switch (opcion) {
 
-                case 1:
-                    if (wallet != null) {
-                        System.out.println("Ya existe una cuenta creada.");
-                        break;
+                    case 1 -> {
+                        BigDecimal saldo =
+                                walletService.consultarSaldo(usuario.getId());
+
+                        System.out.println("Saldo actual: "
+                                + Moneda.CLP.getSimbolo() + " "
+                                + df.format(saldo));
                     }
 
-                    String titular;
-                    do {
-                        System.out.print("Ingrese nombre del titular: ");
-                        titular = scanner.nextLine().trim();
+                    case 2 -> {
+                        System.out.print("Monto a depositar: ");
+                        BigDecimal monto = new BigDecimal(scanner.nextLine());
 
-                        if (titular.isEmpty()) {
-                            System.out.println("El nombre no puede estar vacío.");
-                        } else if (!titular.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
-                            System.out.println("El nombre solo debe contener letras.");
-                            titular = "";
+                        walletService.depositar(usuario.getId(), monto);
+
+                        System.out.println("Depósito realizado correctamente.");
+                    }
+
+                    case 3 -> {
+                        System.out.print("Monto a retirar: ");
+                        BigDecimal monto = new BigDecimal(scanner.nextLine());
+
+                        walletService.retirar(usuario.getId(), monto);
+
+                        System.out.println("Retiro realizado correctamente.");
+                    }
+
+                    case 4 -> {
+                        System.out.print("ID del destinatario: ");
+                        int destino = Integer.parseInt(scanner.nextLine());
+
+                        System.out.print("Monto a transferir: ");
+                        BigDecimal monto = new BigDecimal(scanner.nextLine());
+
+                        walletService.transferir(usuario.getId(), destino, monto);
+
+                        Usuario receptor = walletService.login(destino);
+
+                        System.out.println("Transferencia realizada a "
+                                + receptor.getNombre() + " correctamente.");
+                    }
+
+                    case 5 -> {
+                        System.out.println("Seleccione moneda destino:");
+                        System.out.println("1: USD");
+                        System.out.println("2: EUR");
+                        System.out.print("Opción: ");
+
+                        int opMoneda = Integer.parseInt(scanner.nextLine());
+
+                        Moneda destino;
+
+                        if (opMoneda == 1) {
+                            destino = Moneda.USD;
+                        } else if (opMoneda == 2) {
+                            destino = Moneda.EUR;
+                        } else {
+                            System.out.println("Opción inválida.");
+                            break;
                         }
 
-                    } while (titular.isEmpty());
+                        BigDecimal convertido =
+                                walletService.convertirSaldo(usuario.getId(), destino);
 
-                    Moneda monedaSeleccionada = seleccionarMoneda();
-
-                    System.out.print("Ingrese saldo inicial ("
-                            + monedaSeleccionada.getSimbolo() + "): ");
-
-                    if (!scanner.hasNextDouble()) {
-                        System.out.println("Por favor, ingrese un número válido.");
-                        scanner.nextLine();
-                        break;
+                        System.out.println("Saldo convertido: "
+                                + destino.getSimbolo() + " "
+                                + df.format(convertido));
                     }
 
-                    double saldoInicial = scanner.nextDouble();
-                    scanner.nextLine();
+                 case 6 -> {
 
-                    Cuenta cuenta = new Cuenta(titular, saldoInicial, monedaSeleccionada);
-                    ConvertidorMoneda convertidor = new ConvertidorMonedaSimple();
-                    wallet = new Wallet(cuenta, convertidor);
+    List<Transaccion> historial =
+            walletService.obtenerHistorial(usuario.getId());
 
-                    System.out.println("Cuenta creada exitosamente.");
-                    break;
+    if (historial.isEmpty()) {
+        System.out.println("No hay transacciones.");
+        break;
+    }
 
-                case 2:
-                    if (!validarCuentaCreada()) {
-                        break;
-                    }
-                    System.out.println("Saldo actual: "
-                            + df.format(wallet.getSaldo()) + " "
-                            + wallet.getMoneda().getCodigo()
-                            + " (" + wallet.getMoneda().getSimbolo() + ")");
-                    break;
+    BigDecimal saldoActual =
+            walletService.consultarSaldo(usuario.getId());
 
-                case 3:
-                    if (!validarCuentaCreada()) {
-                        break;
-                    }
-                    System.out.print("Ingrese monto a depositar: ");
+    System.out.println("\nFecha               Tipo      Monto         Saldo        Contraparte");
+    System.out.println("--------------------------------------------------------------------------");
 
-                    if (!scanner.hasNextDouble()) {
-                        System.out.println("Por favor, ingrese un número válido.");
-                        scanner.nextLine(); // Limpiar entrada no válida
-                        break;
-                    }
-                    double deposito = scanner.nextDouble();
-                    scanner.nextLine();
-                    wallet.depositar(deposito);
-                    System.out.println("Nuevo saldo: "
-                            + df.format(wallet.getSaldo()) + " "
-                            + wallet.getMoneda().getCodigo()
-                            + " (" + wallet.getMoneda().getSimbolo() + ")");
-                    break;
+    for (Transaccion t : historial) {
 
-                case 4:
-                    if (!validarCuentaCreada()) {
-                        break;
-                    }
-                    System.out.print("Ingrese monto a retirar: ");
+        boolean esDebito = t.esEmisor(usuario.getNombre());
 
-                    if (!scanner.hasNextDouble()) {
-                        System.out.println("Por favor, ingrese un número válido.");
-                        scanner.nextLine(); // Limpiar entrada no válida
-                        break;
-                    }
-                    double retiro = scanner.nextDouble();
-                    scanner.nextLine();
-                    if (wallet.retirar(retiro)) {
-                        System.out.println("Retiro exitoso. Nuevo saldo: "
-                                + df.format(wallet.getSaldo()) + " "
-                                + wallet.getMoneda().getCodigo()
-                                + " (" + wallet.getMoneda().getSimbolo() + ")");
-                    } else {
-                        System.out.println("Fondos insuficientes.");
-                    }
-                    break;
+        String tipo = esDebito ? "DEBITO" : "CREDITO";
+        String contraparte = esDebito ? t.getReceptor() : t.getEmisor();
 
-                case 5:
+        BigDecimal montoMovimiento = esDebito
+                ? t.getImporte().negate()
+                : t.getImporte();
 
-                    if (!validarCuentaCreada()) {
-                        break;
-                    }
+        System.out.printf("%-18s %-8s %10s %12s %12s%n",
+                t.getFecha().toString().replace("T", " "),
+                tipo,
+                Moneda.CLP.getSimbolo() + " " + df.format(montoMovimiento),
+                Moneda.CLP.getSimbolo() + " " + df.format(saldoActual),
+                contraparte);
 
-                    System.out.println("Seleccione moneda destino:");
-                    Moneda monedaDestino = seleccionarMoneda();
+        // Retrocedemos saldo para siguiente iteración
+        saldoActual = saldoActual.subtract(montoMovimiento);
+    }
+}
+case 7 -> {
 
-                    double convertido = wallet.convertirSaldo(monedaDestino.getCodigo());
-                    System.out.println("Saldo convertido: "
-                            + df.format(convertido) + " "
-                            + monedaDestino.getCodigo()
-                            + " (" + monedaDestino.getSimbolo() + ")");
-                    break;
-                case 0:
-                    System.out.println("Gracias por usar AlkeWallet.");
-                    break;
+    List<Transaccion> historial =
+            walletService.obtenerHistorial(usuario.getId());
 
-                default:
-                    System.out.println("Opción no válida.");
+    if (historial.isEmpty()) {
+        System.out.println("No hay transacciones para exportar.");
+        break;
+    }
+
+    BigDecimal saldoActual =
+            walletService.consultarSaldo(usuario.getId());
+
+    String nombreArchivo = "historial_"
+            + usuario.getId() + "_"
+            + java.time.LocalDateTime.now()
+                .toString()
+                .replace(":", "-")
+                .replace("T", "_")
+            + ".csv";
+
+    alkewallet.util.ExportadorCSV.exportar(
+            nombreArchivo,
+            historial,
+            usuario.getNombre(),
+            saldoActual
+    );
+
+    System.out.println("Archivo generado: " + nombreArchivo);
+}
+                    case 0 -> System.out.println("Gracias por usar AlkeWallet.");
+
+                    default -> System.out.println("Opción inválida.");
+                }
+
+            } catch (MontoInvalidoException |
+                     SaldoInsuficienteException |
+                     UsuarioNoExisteException e) {
+
+                System.out.println("Error: " + e.getMessage());
+
+            } catch (Exception e) {
+                System.out.println("Entrada inválida.");
             }
-
-        } while (opcion != 0);
+        }
 
         scanner.close();
     }

@@ -1,5 +1,7 @@
 package alkewallet.model;
 
+import java.math.BigDecimal;
+
 import alkewallet.convertidor.ConvertidorMoneda;
 
 public class Wallet {
@@ -10,27 +12,21 @@ public class Wallet {
     public Wallet(Cuenta cuenta, ConvertidorMoneda convertidor) {
         this.cuenta = cuenta;
         this.convertidor = convertidor;
-
     }
 
-    public Moneda getMoneda() {
-        return cuenta.getMoneda();
-    }
-
-    public double getSaldo() {
+    public BigDecimal consultarSaldo() {
         return cuenta.getSaldo();
     }
 
-    public void depositar(double monto) {
-        cuenta.depositar(monto);
+    public void recargarSaldo(BigDecimal monto) {
+        cuenta.recargar(monto);
     }
 
-    public boolean retirar(double monto) {
-        return cuenta.retirar(monto);
+    public BigDecimal convertirSaldo(Moneda monedaDestino) {
+        return convertidor.convertir(
+                cuenta.getSaldo(),
+                cuenta.getMoneda(),
+                monedaDestino
+        );
     }
-
-    public double convertirSaldo(String monedaDestino) {
-        return convertidor.convertir(cuenta.getSaldo(), cuenta.getMoneda().getCodigo(), monedaDestino);
-    }
-
 }
