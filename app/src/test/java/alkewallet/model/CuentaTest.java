@@ -109,4 +109,26 @@ public class CuentaTest {
         assertEquals(saldoInicial, cuenta.getSaldo());
         assertFalse(resultadoRetiro);
     }
+
+    @Test
+    void permiteDepositarMontoValido() {
+        // Arrange
+        String titular = "Cristian";
+        double saldoInicial = 100000;
+        Moneda moneda = Moneda.CLP;
+
+        Cuenta cuenta = new Cuenta(titular, saldoInicial, moneda);
+
+        // Act
+        double montoDeposito = 50000;
+        boolean resultadoDeposito = cuenta.depositar(montoDeposito);
+
+        // Assert
+        // El saldo final debe ser la suma del inicial más el depósito (150000)
+        assertEquals(150000, cuenta.getSaldo());
+        // La operación debe retornar true
+        assertTrue(resultadoDeposito);
+    }
+
 }
+
