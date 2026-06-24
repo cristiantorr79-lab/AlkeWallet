@@ -185,7 +185,7 @@ Febrero 2026
 
 ## 📄 Licencia
 
-Este proyecto fue desarrollado con fines educativos para el bootcamp de Desarrollo de Aplicaciones Moviles Android.
+Este proyecto fue desarrollado con fines educativos para el bootcamp de Desarrollo de Aplicaciones Moviles Android dentro del programa Talento Digital de Sence.
 
 ## 🙏 Agradecimientos
 
